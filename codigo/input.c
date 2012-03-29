@@ -1,3 +1,5 @@
+#include<stdlib.h>
+#include<stdio.h>
 #include "estrada.h"
 
 void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* etapa){
@@ -12,7 +14,7 @@ void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* etapa){
 	fscanf(f,"%c",&c); /* velocidade uniforme ou arbitrária */
 	fscanf(f,"%lf",&d); /*a distância da etapa em quilômetros*/
 
-	etapa = malloc(d*sizeof(char));
+	tipo_trecho = malloc(d*sizeof(char));
 	inic_estrada(m, d);
 
 	for(i=0; i<=d;){
@@ -22,7 +24,7 @@ void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* etapa){
 
 		fscanf(f,"%lf",&k);
 		while(i<=k){
-			etapa[i] = t;
+			tipo_trecho[i] = t;
 			i++;
 		}
 
