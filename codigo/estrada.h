@@ -1,9 +1,3 @@
-typedef struct et{
-	char tipo;
-	double dist;
-	et* prox;
-	et* ult;
-} etapa;
 
 unsigned int prox_sinc_temp;
 unsigned int prox_sinc_dist;
