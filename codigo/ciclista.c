@@ -45,7 +45,8 @@ ciclista* inicia_ciclista(char tipo, unsigned int id){
 	  *cic.vs = 50.0;
     *cic.vd = 50.0;
 	}
-  else if( tipo == "A" ){
+  /* Aleatório */
+  else{
     *cic.vp = rand()%60 + 20;
 	  *cic.vs = rand()%60 + 20;
     *cic.vd = rand()%60 + 20;
