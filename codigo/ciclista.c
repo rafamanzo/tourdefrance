@@ -23,6 +23,7 @@ void loop(ciclista c){
     }
     
     prox_pos = floor(c.dist);
+    tempo[cic.id]++;
     
     if(prox_pos > pos_atual){
       estrada[pos_atual][c.id] = 0;

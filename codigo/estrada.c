@@ -2,13 +2,7 @@
 #include<pthread.h>
 #include "estrada.h"
 
-void set_prox_sinc_dist(unsigned int dist){
-  pthread_mutex_lock( &dist_mutex );
-  prox_sinc_dist = dist;
-  pthread_mutex_unlock( &dist_mutex );
-}
-
-void set_prox_sinc_dist(unsigned int temp){
+void set_prox_sinc_temp(unsigned int temp){
   pthread_mutex_lock( &temp_mutex );
   prox_sinc_dist = temp;
   pthread_mutex_unlock( &temp_mutex );
@@ -16,6 +10,8 @@ void set_prox_sinc_dist(unsigned int temp){
 
 void inic_estrada(int num_cic, int dist){
   int i, j;
+
+  tempo = malloc(num_cic*sizeof(unsigned int));
 
   prox_sinc_temp = prox_sinc_dist = 0;
 
@@ -29,20 +25,4 @@ void inic_estrada(int num_cic, int dist){
         estrada[i][j] = 1;
       else
         estrada[i][j] = 0;
-}
-
-void insere(etapa* lst, char c, double k){
-	etapa* new;
-	new = malloc(sizeof(etapa));	
-	new.type = c;
-	new.dist = k;
-	new.prox = NULL;
-	new.ult = NULL;	
-
-	if( lst->ult == NULL)
-		lst->ult = new;
-	else{
-		lst->ult->prox = new;
-		lst->ult = lst->ult->prox;
-	}
 }
