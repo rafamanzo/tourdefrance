@@ -1,5 +1,18 @@
 #include<stdlib.h>
+#include<pthread.h>
 #include "estrada.h"
+
+void set_prox_sinc_dist(unsigned int dist){
+  pthread_mutex_lock( &dist_mutex );
+  prox_sinc_dist = dist;
+  pthread_mutex_unlock( &dist_mutex );
+}
+
+void set_prox_sinc_dist(unsigned int temp){
+  pthread_mutex_lock( &temp_mutex );
+  prox_sinc_dist = temp;
+  pthread_mutex_unlock( &temp_mutex );
+}
 
 void inic_estrada(int num_cic, int dist){
   int i, j;
