@@ -25,32 +25,39 @@ int avanca_tempo(int id){
   return 1;
 }
 
-void loop(ciclista c){
+int avanca_espaco(ciclista c){
   int pos_atual, prox_pos;
-
-  pos_atual = floor(c.dist);
   
+  pos_atual = floor(c.dist);
+
+  switch(tipo_trecho[pos_atual]){
+    case SUBIDA:
+      c.dist += c.vp;
+      break;
+    case DESCIDA:
+      c.dist += c.vd;
+      break;
+    case PLANO:
+      c.dist += c.vp;
+      break;
+  }
+  
+  prox_pos = floor(c.dist);
+  
+  if(prox_pos > pos_atual){
+    while(conta_cic_posicao(prox_pos) >= largura)
+      sleep(1);
+    
+    estrada[pos_atual][c.id] = 0;
+    estrada[prox_pos][c.id] = 1;
+  }
+
+}
+
+void loop(ciclista c){  
   while(pos_atual < max_dist){
-    switch(tipo_trecho[pos_atual]){
-      case SUBIDA:
-        c.dist += c.vp;
-        break;
-      case DESCIDA:
-        c.dist += c.vd;
-        break;
-      case PLANO:
-        c.dist += c.vp;
-        break;
-    }
-    
-    prox_pos = floor(c.dist);
-    
-    if(prox_pos > pos_atual){
-      estrada[pos_atual][c.id] = 0;
-      estrada[prox_pos][c.id] = 1;
-    }
-    
-    avanca_tempo(c.id)
+    avanca_espaco(c);
+    avanca_tempo(c.id);
   }
   
   pthread_exit();

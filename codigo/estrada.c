@@ -7,11 +7,23 @@ int conta_cic_tempo(unsigned int tmp){
   
   contagem = 0;
   
-  for(i = 0; i < num_cic)
+  for(i = 0; i < num_cic; i++)
     if(tempo[i] == tmp)
       contagem++;
       
   return contagem;    
+}
+
+int conta_cic_posicao(unsigned int pos){
+  int i, contagem;
+  
+  contagem = 0;
+  
+  for(i = 0; i < num_cic; i++)
+    if(estrada[pos][i] == 1)
+      contagem++;
+      
+  return contagem;
 }
 
 void inic_estrada(int num_cic, int dist){
