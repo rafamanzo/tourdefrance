@@ -10,7 +10,7 @@ void loop(ciclista c){
   pos_atual = floor(c.dist);
   
   while(pos_atual < max_dist){
-    switch(tipo_trecho[pos_atual] == PLANO){
+    switch(tipo_trecho[pos_atual]){
       case SUBIDA:
         c.dist += c.vp;
         break;
