@@ -2,10 +2,16 @@
 #include<pthread.h>
 #include "estrada.h"
 
-void set_prox_sinc_temp(unsigned int temp){
-  pthread_mutex_lock( &temp_mutex );
-  prox_sinc_dist = temp;
-  pthread_mutex_unlock( &temp_mutex );
+int conta_cic_tempo(unsigned int tmp){
+  int i, contagem;
+  
+  contagem = 0;
+  
+  for(i = 0; i < num_cic)
+    if(tempo[i] == tmp)
+      contagem++;
+      
+  return contagem;    
 }
 
 void inic_estrada(int num_cic, int dist){
@@ -13,7 +19,7 @@ void inic_estrada(int num_cic, int dist){
 
   tempo = malloc(num_cic*sizeof(unsigned int));
 
-  prox_sinc_temp = prox_sinc_dist = 0;
+  prox_sinc_temp = 0;
 
   estrada = malloc(dist*sizeof(short *));
   for(i = 0; i < dist; i++)

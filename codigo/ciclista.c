@@ -1,8 +1,29 @@
 #include<stdlib.h>
 #include<math.h>
 #include<pthread.h>
+#include<unistd.h>
 #include "estrada.h"
 #include "ciclista.h"
+
+int avanca_tempo(int id){
+  tempo[id]++;
+  
+  while(tempo[id] == prox_sinc_temp)
+    if(conta_cic_tempo(prox_sinc_temp) == num_cic){
+      pthread_mutex_lock( &temp_mutex );
+
+      if(tempo[id] == prox_sinc_temp){
+        printf("Imprime o placar aqui");
+        prox_sinc_temp++;
+      }
+      
+      pthread_mutex_unlock( &temp_mutex );
+    }else{
+      sleep(1);
+    }
+    
+  return 1;
+}
 
 void loop(ciclista c){
   int pos_atual, prox_pos;
@@ -23,12 +44,13 @@ void loop(ciclista c){
     }
     
     prox_pos = floor(c.dist);
-    tempo[cic.id]++;
     
     if(prox_pos > pos_atual){
       estrada[pos_atual][c.id] = 0;
       estrada[prox_pos][c.id] = 1;
     }
+    
+    avanca_tempo(c.id)
   }
   
   pthread_exit();
