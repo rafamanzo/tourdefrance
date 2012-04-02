@@ -44,3 +44,20 @@ void placar_min_a_min(int ncics){
   for(i=0; i < ncics; i++)
     print("%u %d\n",biker[i].id, floor(biker[i].dist));
 }
+
+void placar_checkpoint(int *v, int ncics){
+	int i, aux, j;
+
+  /* Bubble sort inverso com apenas 3 bolhas */
+  for(i=0; i < 3; i++){
+    for(j=0; j < ncics-1; j++){
+      if(v[j] < v[j+1]){
+        aux=v[j];
+        v[j]=v[j+1];
+        v[j+1]=aux;
+      }
+    }
+  }
+  for(j=1; j < 4; j++)
+    printf("%dº) %d\n",j,p[ncics-j]);
+}

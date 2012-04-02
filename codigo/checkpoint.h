@@ -7,3 +7,4 @@ typedef struct chkpt{
 
 void novo_checkpoint(int num_cic, char tipo, unsigned int posicao, checkpoint **pontos);
 void checa_passagem(int id_cic, unsigned int tempo_cic, unsigned int posicao, checkpoint *pontos);
+void imprime_checkpoints(checkpoint* , int );

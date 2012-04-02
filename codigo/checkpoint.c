@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "etapa.h"
+#include "checkpoint.h"
 
 void novo_checkpoint(int num_cic, char tipo, unsigned int posicao, checkpoint **pontos){
   checkpoint *novo, *atual;
@@ -31,5 +31,22 @@ void checa_passagem(int id_cic, unsigned int tempo_cic, unsigned int posicao, ch
     if(*atual.posicao == posicao)
       *atual.tempos[id_cic] = tempo_cic;
     atual = *atual.prox;  
+  }
+}
+
+void imprime_checkpoints(checkpoint* c, int ncics){
+  checkpoint aux = c;
+
+   while( aux != NULL){
+    printf("\nCheckpoint -");
+    if( aux.tipo == "P" )
+      printf(" Trecho Plano -");
+    else if( aux.tipo == "S" )
+      printf(" Trecho de Subida -");
+    else
+      printf(" Trecho de Descida -");
+    printf(" %u Km \n",aux.posicao);
+	  placar_checkpoint(aux.tempos, ncics);
+    aux = aux.prox;
   }
 }
