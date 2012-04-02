@@ -8,6 +8,7 @@ char *tipo_trecho;
 unsigned int *tempo;
 unsigned short largura;
 unsigned int num_cic;
+checkpoint *pontos;
 
 pthread_mutex_t temp_mutex = PTHREAD_MUTEX_INITIALIZER;
 

@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include "checkpoint.h"
 #include "estrada.h"
 
 void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* tipo_trecho){
@@ -7,10 +8,11 @@ void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* tipo_trech
 	char t;
 	double k;
 	int i, j;
-	
+  etapa *nova;
+  	
 	f = fopen("r",arquivo);
-	fscanf(f,"%d",&m);/* m: a quantidade de ciclistas */
-	fscanf(f,"%d",&n); /* n: a largura da pista em número de ciclistas*/
+	fscanf(f,"%d",&num_cic);/* m: a quantidade de ciclistas */
+	fscanf(f,"%d",&largura); /* n: a largura da pista em número de ciclistas*/
 	fscanf(f,"%c",&c); /* velocidade uniforme ou arbitrária */
 	fscanf(f,"%lf",&d); /*a distância da etapa em quilômetros*/
 
@@ -23,6 +25,17 @@ void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* tipo_trech
 			break;
 
 		fscanf(f,"%lf",&k);
+		switch(t){
+		  case SUBIDA:
+        novo_checkpoint(num_cic, SUBIDA, k, &pontos);
+        break;
+      case DESCIDA:
+        novo_checkpoint(num_cic, DESCIDA, k, &pontos);
+        break;
+      case PLANO:
+        novo_checkpoint(num_cic, PLANO, k/2, &pontos);
+        break;
+		}
 		while(i<=k){
 			tipo_trecho[i] = t;
 			i++;
