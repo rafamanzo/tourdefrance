@@ -1,4 +1,5 @@
 #include "placar.h"
+#include <math.h>
 
 placar* inicia_placar(int cics){
 	placar* p;
@@ -12,11 +13,11 @@ placar* inicia_placar(int cics){
   return *p;
 }
 
-void insertion_sort(placar *p, int cics){               
+void insertion_sort(placar *p, int ncics){               
   int i, j;
   placar aux;
  
-  for(i=1; i < cics; i++){
+  for(i=1; i < ncics; i++){
     j = i;
     while(p[j].tempo < p[j-1].tempo){
       aux = p[j];
@@ -29,18 +30,17 @@ void insertion_sort(placar *p, int cics){
   }
 }
 
-void imprime_placar(placar *p, int cics){
+void imprime_placar(placar *p, int ncics){
   int i;
 
   insertion_sort(&p,cics);
   printf("Placar\n");
-  for(i=0; i < cics; i++)
+  for(i=0; i < ncics; i++)
     printf("%3d %.6lf\n",p[i].id, p[i].tempo);
 }
-  
 
-
-
-
-
-
+void placar_min_a_min(int ncics){
+  printf("Ciclista\t km da etapa\n")
+  for(i=0; i < ncics; i++)
+    print("%u %d\n",biker[i].id, floor(biker[i].dist));
+}

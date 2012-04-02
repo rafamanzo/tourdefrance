@@ -4,6 +4,7 @@
 #include<unistd.h>
 #include "estrada.h"
 #include "ciclista.h"
+#include "placar.h"
 
 int avanca_tempo(int id){
   tempo[id]++;
@@ -13,7 +14,7 @@ int avanca_tempo(int id){
       pthread_mutex_lock( &temp_mutex );
 
       if(tempo[id] == prox_sinc_temp){
-        printf("Imprime o placar aqui");
+        placar_min_a_min(num_cic);
         prox_sinc_temp++;
       }
       

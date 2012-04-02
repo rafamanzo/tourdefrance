@@ -8,7 +8,6 @@ int main(int argc, char *argv[])
   int m, n;
   char c;
   double d;
-  ciclista* biker;
 
 	srand(time(NULL));
 
