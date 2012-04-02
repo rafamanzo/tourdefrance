@@ -2,6 +2,7 @@
 #include<math.h>
 #include<pthread.h>
 #include<unistd.h>
+#include "checkpoint.h"
 #include "estrada.h"
 #include "ciclista.h"
 #include "placar.h"
@@ -51,8 +52,11 @@ int avanca_espaco(ciclista c){
     
     estrada[pos_atual][c.id] = 0;
     estrada[prox_pos][c.id] = 1;
+    
+    checa_passagem(c.id, tempo[c.id], prox_pos, pontos);
   }
 
+  return 1;
 }
 
 void loop(ciclista c){  
