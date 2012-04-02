@@ -82,3 +82,12 @@ ciclista* inicia_ciclista(char tipo, unsigned int id){
 	}
   return cic;
 }
+
+void imprime_ciclista(ciclista c){
+    printf("%u\t %lf\t %lf\t %lf \n",c.id,c.vp,c.vs,c.vd);
+}
+
+
+
+
+

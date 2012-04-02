@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include "estrada.h"
 
-void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* etapa){
+void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* tipo_trecho){
 	FILE *f;
 	char t;
 	double k;

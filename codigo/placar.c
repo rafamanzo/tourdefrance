@@ -42,3 +42,5 @@ void imprime_placar(placar *p, int cics){
 
 
 
+
+

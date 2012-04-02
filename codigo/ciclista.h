@@ -7,4 +7,4 @@ typedef struct cic{
 } ciclista;
 
 ciclista* inicia_ciclista(char, unsigned int);
-
+void imprime_ciclista(ciclista);
