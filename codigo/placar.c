@@ -1,54 +1,7 @@
 #include "placar.h"
 #include <math.h>
 
-placar* inicia_placar(int cics){
-	placar* p;
-	
-  *p = malloc(cics*sizeof(placar));
-  
-  for(i=0; i < cics; i++){
-    *p[i].id = 0;
-    *p[i].tempo = 0.0;
-  }
-  return *p;
-}
-
-
-void insertion_sort(placar *p, int ncics){               
-  int i, j;
-  placar aux;
- 
-  for(i=1; i < ncics; i++){
-    j = i;
-    while(p[j].tempo < p[j-1].tempo){
-      aux = p[j];
-      p[j] = p[j-1];
-      p[j-1] = aux;
-      j--;    
-      if(j == 0)
-        break;
-    }               
-  }
-}
-
-void imprime_placar(placar *p, int ncics){
-  int i;
-
-  insertion_sort(&p,cics);
-  printf("Placar\n");
-  for(i=0; i < ncics; i++)
-    printf("%3d %.6lf\n",p[i].id, p[i].tempo);
-}
-
-
-
-void placar_min_a_min(int ncics){
-  printf("Ciclista\t km da etapa\n")
-  for(i=0; i < ncics; i++)
-    print("%u %d\n",biker[i].id, floor(biker[i].dist));
-}
-
-void placar_checkpoint(int *v, int ncics){
+void ordena_imprime(int *v, int ncics){
 	int i, aux, j;
 	int *p;
   
@@ -56,8 +9,35 @@ void placar_checkpoint(int *v, int ncics){
   for(i=0; i < ncics; i++)
 		p[i] = i;
 
-  /* Bubble sort inverso com apenas 3 bolhas */
-  for(i=0; i < 3; i++){
+  for(i=0; i < ncics; i++){
+    for(j=0; j < ncics-1; j++){
+      if(v[p[j]] > v[p[j+1]]){
+				aux = p[j];
+				p[j] = p[j+1];
+				p[j+1] = aux;
+      }
+    }
+  }
+  for(j=1; j < ncics; j++)
+      printf("%dº) %d\n",j,v[p[ncics-j]]);
+}
+
+void placar_min_a_min(int ncics){
+  printf("Ciclista\t km da etapa\n")
+  for(i=0; i < ncics; i++)
+    print("%u %d\n",biker[i].id, floor(biker[i].dist));
+}
+
+void placar_checkpoint(int *v, int **pontos, int ncics){
+	int i, aux, j;
+	int *p;
+  
+  p = malloc(ncics*sizeof(int));
+  for(i=0; i < ncics; i++)
+		p[i] = i;
+
+  /* Bubble sort inverso com apenas 6 bolhas */
+  for(i=0; i < 6; i++){
     for(j=0; j < ncics-1; j++){
       if(v[p[j]] < v[p[j+1]]){
 				aux = p[j];
@@ -66,6 +46,73 @@ void placar_checkpoint(int *v, int ncics){
       }
     }
   }
-  for(j=1; j < 4; j++)
-    printf("%dº) %d\n",j,v[p[ncics-j]]);
+  /* Imprime os 3 primeiros colocados e distribui as pontuações */
+  for(j=1; j < 7; j++){
+    if( j < 4 )
+      printf("%dº) %d\n",j,v[p[ncics-j]]);
+    switch( j ){
+      case 1:
+        pontos[p[ncics-j]] += 45;
+        break;
+      case 2:
+        pontos[p[ncics-j]] += 35;
+        break;
+      case 3:
+        pontos[p[ncics-j]] += 25;
+        break;
+      case 4:
+        pontos[p[ncics-j]] += 15;
+        break;
+      case 5:
+        pontos[p[ncics-j]] += 10;
+        break;
+      case 6:
+        pontos[p[ncics-j]] += 5;
+        break;
+    }
+   }
+  free(p);
+}
+
+
+void imprime_final(checkpoint* c, int ncics){
+  checkpoint *aux = c;
+  int *pontos_plano, *pontos_subida, *pontos_descida;
+
+	pontos_plano = malloc(ncics*sizeof(int));
+	pontos_subida = malloc(ncics*sizeof(int));
+	pontos_descida = malloc(ncics*sizeof(int));
+
+  for( i = 0; i < ncics, i++)
+    pontos_plano[i] = pontos_subida[i] = pontos_descida[i] = 0;
+
+   while( aux != NULL){
+    printf("\nCheckpoint -");
+    if( *aux.tipo == "P" ){
+      printf(" Trecho Plano - %u Km \n",*aux.posicao);
+  	  placar_checkpoint(*aux.tempos,*pontos_planos, ncics);
+    }
+    else if( *aux.tipo == "S" ){
+      printf(" Trecho de Subida - %u Km \n",*aux.posicao);
+   	  placar_checkpoint(*aux.tempos,*pontos_subida, ncics);  
+    }
+    else{
+      printf(" Trecho de Descida - %u Km \n",*aux.posicao);
+   	  placar_checkpoint(*aux.tempos,*pontos_planos, ncics);  
+    }
+    aux = *aux.prox;
+  }
+
+  printf("Placar Trechos Planos\n");
+  ordena_imprime(pontos_plano,ncics);
+
+  printf("\nPlacar Trechos de Subida\n");
+  ordena_imprime(pontos_subida,ncics);
+
+  printf("\nPlacar Trechos de Descida\n");
+  ordena_imprime(pontos_descida,ncics);
+  
+  free(pontos_plano);
+  free(pontos_subida);
+  free(pontos_descida);
 }
