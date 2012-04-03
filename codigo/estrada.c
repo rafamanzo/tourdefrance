@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<pthread.h>
+#include "checkpoint.h"
 #include "estrada.h"
 
 int conta_cic_tempo(unsigned int tmp){
@@ -31,6 +32,7 @@ void inic_estrada(int num_cic, int dist){
 
   tempo = malloc(num_cic*sizeof(unsigned int));
 
+  pthread_mutex_init(&temp_mutex, NULL);
   prox_sinc_temp = 0;
 
   estrada = malloc(dist*sizeof(short *));

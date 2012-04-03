@@ -8,9 +8,10 @@ char *tipo_trecho;
 unsigned int *tempo;
 unsigned short largura;
 unsigned int num_cic;
+unsigned int max_dist;
 checkpoint *pontos;
 
-pthread_mutex_t temp_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t temp_mutex;
 
 void inic_estrada(int num_cic, int dist);
 void set_prox_sinc_temp(unsigned int temp);

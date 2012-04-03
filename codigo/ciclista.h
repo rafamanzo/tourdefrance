@@ -6,6 +6,8 @@ typedef struct cic{
 	double vd; /* Velocidade na descida km/s*/
 } ciclista;
 
-ciclista* biker;
-ciclista* inicia_ciclista(char, unsigned int);
+ciclista *biker;
+
+ciclista inicia_ciclista(char, unsigned int);
+void loop(ciclista c);
 void imprime_ciclista(ciclista);

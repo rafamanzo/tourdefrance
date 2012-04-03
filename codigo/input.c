@@ -1,30 +1,30 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<pthread.h>
 #include "checkpoint.h"
 #include "estrada.h"
+#include "input.h"
 
-void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* tipo_trecho){
+void entrada(char *arquivo, int* m, int* n, char* c, int *d, char** tipo_trecho){
 	FILE *f;
 	char t;
-	double k;
-	int i, j;
-  etapa *nova;
+	int i, k;
   	
 	f = fopen("r",arquivo);
-	fscanf(f,"%d",&num_cic);/* m: a quantidade de ciclistas */
-	fscanf(f,"%d",&largura); /* n: a largura da pista em número de ciclistas*/
-	fscanf(f,"%c",&c); /* velocidade uniforme ou arbitrária */
-	fscanf(f,"%lf",&d); /*a distância da etapa em quilômetros*/
+	fscanf(f, "%u", &num_cic);/* m: a quantidade de ciclistas */
+	fscanf(f, "%hu", &largura); /* n: a largura da pista em número de ciclistas*/
+	fscanf(f, "%c", c); /* velocidade uniforme ou arbitrária */
+	fscanf(f, "%d", d); /*a distância da etapa em quilômetros*/
 
-	tipo_trecho = malloc(d*sizeof(char));
-	inic_estrada(m, d);
+	tipo_trecho = malloc((*d)*sizeof(char));
+	inic_estrada(num_cic, *d);
 
-	for(i=0; i<=d;){
+	for(i=0; i<=(*d); i++){
 		fscanf(f,"%c",&t);
 		if( t == EOF )
 			break;
 
-		fscanf(f,"%lf",&k);
+		fscanf(f,"%d",&k);
 		switch(t){
 		  case SUBIDA:
         novo_checkpoint(num_cic, SUBIDA, k, &pontos);
@@ -37,12 +37,8 @@ void entrada(char *arquivo, int* m, int* n, char* c, double *d, char* tipo_trech
         break;
 		}
 		while(i<=k){
-			tipo_trecho[i] = t;
+			tipo_trecho[i] = (char) t;
 			i++;
 		}
-
-		/* Sinaliza o fim de uma etapa na estrada */
-		for(j=0; j < m; j++)
-			estrada[j][k] = 2;
 	}
 }

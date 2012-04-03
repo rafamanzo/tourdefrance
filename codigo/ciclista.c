@@ -2,6 +2,7 @@
 #include<math.h>
 #include<pthread.h>
 #include<unistd.h>
+#include<stdio.h>
 #include "checkpoint.h"
 #include "estrada.h"
 #include "ciclista.h"
@@ -30,21 +31,21 @@ int avanca_tempo(int id){
 int avanca_espaco(ciclista c){
   int pos_atual, prox_pos;
   
-  pos_atual = floor(c.dist);
+  pos_atual = floor(c.pos);
 
   switch(tipo_trecho[pos_atual]){
     case SUBIDA:
-      c.dist += c.vp;
+      c.pos += c.vp;
       break;
     case DESCIDA:
-      c.dist += c.vd;
+      c.pos += c.vd;
       break;
     case PLANO:
-      c.dist += c.vp;
+      c.pos += c.vp;
       break;
   }
   
-  prox_pos = floor(c.dist);
+  prox_pos = floor(c.pos);
   
   if(prox_pos > pos_atual){
     while(conta_cic_posicao(prox_pos) >= largura)
@@ -60,36 +61,35 @@ int avanca_espaco(ciclista c){
 }
 
 void loop(ciclista c){  
-  while(pos_atual < max_dist){
+  while(c.pos < max_dist){
     avanca_espaco(c);
     avanca_tempo(c.id);
   }
   
-  pthread_exit();
+  pthread_exit(0);
 }
 
-ciclista* inicia_ciclista(char tipo, unsigned int id){
-  ciclista* cic;
+ciclista inicia_ciclista(char tipo, unsigned int id){
+  ciclista cic;
  
-  cic = malloc(sizeof(ciclista)); 
-  *cic.id = id;
-  *cic.pos = 0.0;
-  if( tipo == "U" ){
-    *cic.vp = 50.0;
-	  *cic.vs = 50.0;
-    *cic.vd = 50.0;
+  cic.id = id;
+  cic.pos = 0.0;
+  if( tipo == 'U' ){
+    cic.vp = 50.0;
+	  cic.vs = 50.0;
+    cic.vd = 50.0;
 	}
   /* Aleatório */
   else{
-    *cic.vp = rand()%60 + 20;
-	  *cic.vs = rand()%60 + 20;
-    *cic.vd = rand()%60 + 20;
+    cic.vp = rand()%60 + 20;
+	  cic.vs = rand()%60 + 20;
+    cic.vd = rand()%60 + 20;
 	}
   return cic;
 }
 
 void imprime_ciclista(ciclista c){
-    printf("%u\t %lf\t %lf\t %lf \n",c.id,c.vp,c.vs,c.vd);
+    printf("%u\t %f\t %f\t %f \n",c.id,c.vp,c.vs,c.vd);
 }
 
 

@@ -1,13 +1,13 @@
-#include <stlib.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 #include "input.h"
 #include "ciclista.h"
 
-int main(int argc, char *argv[])
-  char *arquivo, *tipo_trecho;
-  int m, n;
+int main(int argc, char *argv[]){
+  char *tipo_trecho;
+  int m, n, i, d;
   char c;
-  double d;
 
 	srand(time(NULL));
 
@@ -24,10 +24,6 @@ int main(int argc, char *argv[])
   /* "Largada" */
   for( i = 0; i < m; i++)
     loop(biker[i]);
-    
 
-
-
- 
  return 0;
 }

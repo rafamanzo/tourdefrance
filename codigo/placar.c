@@ -1,5 +1,11 @@
-#include "placar.h"
+#include<stdio.h>
+#include<stdlib.h>
 #include <math.h>
+#include <pthread.h>
+#include "checkpoint.h"
+#include "estrada.h"
+#include "ciclista.h"
+#include "placar.h"
 
 void ordena_imprime(int *v, int ncics){
 	int i, aux, j;
@@ -23,12 +29,14 @@ void ordena_imprime(int *v, int ncics){
 }
 
 void placar_min_a_min(int ncics){
-  printf("Ciclista\t km da etapa\n")
+  int i;
+
+  printf("Ciclista\t km da etapa\n");
   for(i=0; i < ncics; i++)
-    print("%u %d\n",biker[i].id, floor(biker[i].dist));
+    printf("%u %d\n", biker[i].id, (int) floor(biker[i].pos));
 }
 
-void placar_checkpoint(int *v, int **pontos, int ncics){
+void placar_checkpoint(unsigned int *v, int *pontos, int ncics){
 	int i, aux, j;
 	int *p;
   
@@ -78,29 +86,30 @@ void placar_checkpoint(int *v, int **pontos, int ncics){
 void imprime_final(checkpoint* c, int ncics){
   checkpoint *aux = c;
   int *pontos_plano, *pontos_subida, *pontos_descida;
+  int i;
 
 	pontos_plano = malloc(ncics*sizeof(int));
 	pontos_subida = malloc(ncics*sizeof(int));
 	pontos_descida = malloc(ncics*sizeof(int));
 
-  for( i = 0; i < ncics, i++)
+  for( i = 0; i < ncics; i++)
     pontos_plano[i] = pontos_subida[i] = pontos_descida[i] = 0;
 
    while( aux != NULL){
     printf("\nCheckpoint -");
-    if( *aux.tipo == "P" ){
-      printf(" Trecho Plano - %u Km \n",*aux.posicao);
-  	  placar_checkpoint(*aux.tempos,*pontos_planos, ncics);
+    if( (*aux).tipo == PLANO ){
+      printf(" Trecho Plano - %u Km \n",(*aux).posicao*2);
+  	  placar_checkpoint((*aux).tempos,pontos_plano, ncics);
     }
-    else if( *aux.tipo == "S" ){
-      printf(" Trecho de Subida - %u Km \n",*aux.posicao);
-   	  placar_checkpoint(*aux.tempos,*pontos_subida, ncics);  
+    else if( (*aux).tipo == SUBIDA ){
+      printf(" Trecho de Subida - %u Km \n",(*aux).posicao);
+   	  placar_checkpoint((*aux).tempos,pontos_subida, ncics);  
     }
     else{
-      printf(" Trecho de Descida - %u Km \n",*aux.posicao);
-   	  placar_checkpoint(*aux.tempos,*pontos_planos, ncics);  
+      printf(" Trecho de Descida - %u Km \n",(*aux).posicao);
+   	  placar_checkpoint((*aux).tempos,pontos_descida, ncics);  
     }
-    aux = *aux.prox;
+    aux = (*aux).prox;
   }
 
   printf("Placar Trechos Planos\n");
