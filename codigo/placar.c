@@ -13,6 +13,7 @@ placar* inicia_placar(int cics){
   return *p;
 }
 
+
 void insertion_sort(placar *p, int ncics){               
   int i, j;
   placar aux;
@@ -39,6 +40,8 @@ void imprime_placar(placar *p, int ncics){
     printf("%3d %.6lf\n",p[i].id, p[i].tempo);
 }
 
+
+
 void placar_min_a_min(int ncics){
   printf("Ciclista\t km da etapa\n")
   for(i=0; i < ncics; i++)
@@ -47,17 +50,22 @@ void placar_min_a_min(int ncics){
 
 void placar_checkpoint(int *v, int ncics){
 	int i, aux, j;
+	int *p;
+  
+  p = malloc(ncics*sizeof(int));
+  for(i=0; i < ncics; i++)
+		p[i] = i;
 
   /* Bubble sort inverso com apenas 3 bolhas */
   for(i=0; i < 3; i++){
     for(j=0; j < ncics-1; j++){
-      if(v[j] < v[j+1]){
-        aux=v[j];
-        v[j]=v[j+1];
-        v[j+1]=aux;
+      if(v[p[j]] < v[p[j+1]]){
+				aux = p[j];
+				p[j] = p[j+1];
+				p[j+1] = aux;
       }
     }
   }
   for(j=1; j < 4; j++)
-    printf("%dº) %d\n",j,p[ncics-j]);
+    printf("%dº) %d\n",j,v[p[ncics-j]]);
 }

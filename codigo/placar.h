@@ -1,8 +1,8 @@
-typedef struct pl{
-	unsigned int id;
-	double tempo;
-	double dist;
-} placar;
+typedef struct pt{
+	unsigned int plano;
+	unsigned int subida;
+	unsigned int decida;
+} ponto;
 
 placar* inicia_placar(int);
 void imprime_placar(placar*, int);
