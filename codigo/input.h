@@ -1,1 +1,1 @@
-void entrada(char*, int*, int*, char*, int*, char**);
+void entrada(char*, char*, int*, char**);

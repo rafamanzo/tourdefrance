@@ -5,19 +5,22 @@
 #include "estrada.h"
 #include "input.h"
 
-void entrada(char *arquivo, int* m, int* n, char* c, int *d, char** tipo_trecho){
+void entrada(char *arquivo, char* c, int *d, char** tipo_trecho){
 	FILE *f;
 	char t;
 	int i, k;
   	
-	f = fopen("r",arquivo);
+	if((f = fopen(arquivo,"r")) == NULL){
+		printf("Erro ao abrir o arquivo %s.\n",arquivo);
+		exit(-1);
+	}
 	fscanf(f, "%u", &num_cic);/* m: a quantidade de ciclistas */
 	fscanf(f, "%hu", &largura); /* n: a largura da pista em número de ciclistas*/
 	fscanf(f, "%c", c); /* velocidade uniforme ou arbitrária */
 	fscanf(f, "%d", d); /*a distância da etapa em quilômetros*/
 
 	tipo_trecho = malloc((*d)*sizeof(char));
-	inic_estrada(num_cic, *d);
+	inic_estrada(*d);
 
 	for(i=0; i<=(*d); i++){
 		fscanf(f,"%c",&t);

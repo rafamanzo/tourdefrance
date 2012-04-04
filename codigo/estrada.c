@@ -27,7 +27,7 @@ int conta_cic_posicao(unsigned int pos){
   return contagem;
 }
 
-void inic_estrada(int num_cic, int dist){
+void inic_estrada(int dist){
   int i, j;
 
   tempo = malloc(num_cic*sizeof(unsigned int));
