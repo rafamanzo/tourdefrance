@@ -7,16 +7,16 @@
 #include "ciclista.h"
 #include "placar.h"
 
-void ordena_imprime(int *v, int ncics){
+void ordena_imprime(int *v){
 	int i, aux, j;
 	int *p;
   
-  p = malloc(ncics*sizeof(int));
-  for(i=0; i < ncics; i++)
+  p = malloc(num_cic*sizeof(int));
+  for(i=0; i < num_cic; i++)
 		p[i] = i;
 
-  for(i=0; i < ncics; i++){
-    for(j=0; j < ncics-1; j++){
+  for(i=0; i < num_cic; i++){
+    for(j=0; j < num_cic-1; j++){
       if(v[p[j]] > v[p[j+1]]){
 				aux = p[j];
 				p[j] = p[j+1];
@@ -24,29 +24,29 @@ void ordena_imprime(int *v, int ncics){
       }
     }
   }
-  for(j=1; j < ncics; j++)
-      printf("%dº) %d\n",j,v[p[ncics-j]]);
+  for(j=1; j < num_cic; j++)
+      printf("%dº) %d\n",j,v[p[num_cic-j]]);
 }
 
-void placar_min_a_min(int ncics){
+void placar_min_a_min(){
   int i;
 
   printf("Ciclista\t km da etapa\n");
-  for(i=0; i < ncics; i++)
+  for(i=0; i < num_cic; i++)
     printf("%u %d\n", biker[i].id, (int) floor(biker[i].pos));
 }
 
-void placar_checkpoint(unsigned int *v, int *pontos, int ncics){
+void placar_checkpoint(unsigned int *v, int *pontos){
 	int i, aux, j;
 	int *p;
   
-  p = malloc(ncics*sizeof(int));
-  for(i=0; i < ncics; i++)
+  p = malloc(num_cic*sizeof(int));
+  for(i=0; i < num_cic; i++)
 		p[i] = i;
 
   /* Bubble sort inverso com apenas 6 bolhas */
   for(i=0; i < 6; i++){
-    for(j=0; j < ncics-1; j++){
+    for(j=0; j < num_cic-1; j++){
       if(v[p[j]] < v[p[j+1]]){
 				aux = p[j];
 				p[j] = p[j+1];
@@ -57,25 +57,25 @@ void placar_checkpoint(unsigned int *v, int *pontos, int ncics){
   /* Imprime os 3 primeiros colocados e distribui as pontuações */
   for(j=1; j < 7; j++){
     if( j < 4 )
-      printf("%dº) %d\n",j,v[p[ncics-j]]);
+      printf("%dº) %d\n",j,v[p[num_cic-j]]);
     switch( j ){
       case 1:
-        pontos[p[ncics-j]] += 45;
+        pontos[p[num_cic-j]] += 45;
         break;
       case 2:
-        pontos[p[ncics-j]] += 35;
+        pontos[p[num_cic-j]] += 35;
         break;
       case 3:
-        pontos[p[ncics-j]] += 25;
+        pontos[p[num_cic-j]] += 25;
         break;
       case 4:
-        pontos[p[ncics-j]] += 15;
+        pontos[p[num_cic-j]] += 15;
         break;
       case 5:
-        pontos[p[ncics-j]] += 10;
+        pontos[p[num_cic-j]] += 10;
         break;
       case 6:
-        pontos[p[ncics-j]] += 5;
+        pontos[p[num_cic-j]] += 5;
         break;
     }
    }
@@ -83,43 +83,43 @@ void placar_checkpoint(unsigned int *v, int *pontos, int ncics){
 }
 
 
-void imprime_final(checkpoint* c, int ncics){
+void imprime_final(checkpoint* c){
   checkpoint *aux = c;
   int *pontos_plano, *pontos_subida, *pontos_descida;
   int i;
 
-	pontos_plano = malloc(ncics*sizeof(int));
-	pontos_subida = malloc(ncics*sizeof(int));
-	pontos_descida = malloc(ncics*sizeof(int));
+	pontos_plano = malloc(num_cic*sizeof(int));
+	pontos_subida = malloc(num_cic*sizeof(int));
+	pontos_descida = malloc(num_cic*sizeof(int));
 
-  for( i = 0; i < ncics; i++)
+  for( i = 0; i < num_cic; i++)
     pontos_plano[i] = pontos_subida[i] = pontos_descida[i] = 0;
 
    while( aux != NULL){
     printf("\nCheckpoint -");
     if( (*aux).tipo == PLANO ){
       printf(" Trecho Plano - %u Km \n",(*aux).posicao*2);
-  	  placar_checkpoint((*aux).tempos,pontos_plano, ncics);
+  	  placar_checkpoint((*aux).tempos,pontos_plano);
     }
     else if( (*aux).tipo == SUBIDA ){
       printf(" Trecho de Subida - %u Km \n",(*aux).posicao);
-   	  placar_checkpoint((*aux).tempos,pontos_subida, ncics);  
+   	  placar_checkpoint((*aux).tempos,pontos_subida);  
     }
     else{
       printf(" Trecho de Descida - %u Km \n",(*aux).posicao);
-   	  placar_checkpoint((*aux).tempos,pontos_descida, ncics);  
+   	  placar_checkpoint((*aux).tempos,pontos_descida);  
     }
     aux = (*aux).prox;
   }
 
   printf("Placar Trechos Planos\n");
-  ordena_imprime(pontos_plano,ncics);
+  ordena_imprime(pontos_plano);
 
   printf("\nPlacar Trechos de Subida\n");
-  ordena_imprime(pontos_subida,ncics);
+  ordena_imprime(pontos_subida);
 
   printf("\nPlacar Trechos de Descida\n");
-  ordena_imprime(pontos_descida,ncics);
+  ordena_imprime(pontos_descida);
   
   free(pontos_plano);
   free(pontos_subida);

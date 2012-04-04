@@ -3,7 +3,7 @@
 #include <time.h>
 #include "input.h"
 #include "ciclista.h"
-#include<pthread.h>
+#include <pthread.h>
 #include "checkpoint.h"
 #include "estrada.h"
 
@@ -24,6 +24,7 @@ int main(int argc, char *argv[]){
     biker[i] = inicia_ciclista(c, i);
     imprime_ciclista(biker[i]);
   }
+  printf("LARGADA\n");
   /* "Largada" */
   for( i = 0; i < num_cic; i++)
     loop(biker[i]);
