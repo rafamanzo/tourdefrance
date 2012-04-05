@@ -60,10 +60,15 @@ int avanca_espaco(ciclista c){
   return 1;
 }
 
-void loop(ciclista c){  
-  while(c.pos < max_dist){
-    avanca_espaco(c);
-    avanca_tempo(c.id);
+void * loop(void *c){
+  ciclista *c_aux, cic;
+  
+  c_aux = (ciclista *) c;
+  cic = *c_aux;
+  
+  while(cic.pos < max_dist){
+    avanca_espaco(cic);
+    avanca_tempo(cic.id);
   }
   
   pthread_exit(0);

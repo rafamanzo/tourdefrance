@@ -9,5 +9,5 @@ typedef struct cic{
 ciclista *biker;
 
 ciclista inicia_ciclista(char, unsigned int);
-void loop(ciclista c);
+void * loop(void *c);
 void imprime_ciclista(ciclista);

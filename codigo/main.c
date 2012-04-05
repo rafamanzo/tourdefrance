@@ -8,6 +8,7 @@
 #include "estrada.h"
 
 int main(int argc, char *argv[]){
+  pthread_t *corredores;
   char *tipo_trecho;
   int i, d;
   char c;
@@ -26,8 +27,11 @@ int main(int argc, char *argv[]){
   }
   printf("LARGADA\n");
   /* "Largada" */
+  corredores = malloc(num_cic*sizeof(pthread_t));
   for( i = 0; i < num_cic; i++)
-    loop(biker[i]);
+    pthread_create( &(corredores[i]), NULL, loop, (void *) &(biker[i]));
+  for( i = 0; i < num_cic; i++)
+    pthread_join( corredores[i], NULL );
 
  return 0;
 }
