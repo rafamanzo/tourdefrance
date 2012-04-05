@@ -27,6 +27,7 @@ int main(int argc, char *argv[]){
   }
   printf("LARGADA\n");
   /* "Largada" */
+  inic_estrada(d);
   corredores = malloc(num_cic*sizeof(pthread_t));
   for( i = 0; i < num_cic; i++)
     pthread_create( &(corredores[i]), NULL, loop, (void *) &(biker[i]));

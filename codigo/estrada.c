@@ -34,6 +34,7 @@ void inic_estrada(int dist){
 
   pthread_mutex_init(&temp_mutex, NULL);
   prox_sinc_temp = 0;
+  max_dist = dist;
 
   estrada = malloc(dist*sizeof(short *));
   for(i = 0; i < dist; i++)
