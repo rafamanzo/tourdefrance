@@ -80,21 +80,21 @@ ciclista inicia_ciclista(char tipo, unsigned int id){
   cic.id = id;
   cic.pos = 0.0;
   if( tipo == 'U' ){
-    cic.vp = 50.0;
-	  cic.vs = 50.0;
-    cic.vd = 50.0;
+    cic.vp = 50.0/3600.0;
+	  cic.vs = 50.0/3600.0;
+    cic.vd = 50.0/3600.0;
 	}
   /* Aleatório */
   else{
-    cic.vp = rand()%60 + 20;
-	  cic.vs = rand()%60 + 20;
-    cic.vd = rand()%60 + 20;
+    cic.vp = (rand()%60 + 20)/3600.0;
+	  cic.vs = (rand()%60 + 20)/3600.0;
+    cic.vd = (rand()%60 + 20)/3600.0;
 	}
   return cic;
 }
 
 void imprime_ciclista(ciclista c){
-    printf("%u\t %f\t %f\t %f \n",c.id,c.vp,c.vs,c.vd);
+    printf("%u\t %f\t %f\t %f \n",c.id,c.vp*3600.0,c.vs*3600.0,c.vd*3600.0);
 }
 
 
