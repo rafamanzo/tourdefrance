@@ -29,6 +29,7 @@ int main(int argc, char *argv[]){
   printf("LARGADA\n");
   /* "Largada" */
   corredores = malloc(num_cic*sizeof(pthread_t));
+  correndo = num_cic;
   for( i = 0; i < num_cic; i++)
     pthread_create( &(corredores[i]), NULL, loop, (void *) &(biker[i]));
   for( i = 0; i < num_cic; i++)

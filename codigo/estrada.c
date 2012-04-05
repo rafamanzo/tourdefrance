@@ -15,13 +15,13 @@ int conta_cic_tempo(unsigned int tmp){
   return contagem;    
 }
 
-int conta_cic_posicao(unsigned int pos){
+int conta_cic_posicao(unsigned int pos, int tmp){
   int i, contagem;
   
   contagem = 0;
   
   for(i = 0; i < num_cic; i++)
-    if(estrada[pos][i] == 1)
+    if(estrada[pos][i] == 1 && tempo[i] == tmp)
       contagem++;
       
   return contagem;
@@ -33,6 +33,8 @@ int pos_ciclista(int id){
   for(i = 0; i < max_dist; i++)
     if(estrada[i][id])
       return i;
+  
+  return max_dist;
 }
 
 void inic_estrada(int dist){
