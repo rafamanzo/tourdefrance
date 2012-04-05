@@ -5,7 +5,7 @@
 #include "estrada.h"
 #include "input.h"
 
-void entrada(char *arquivo, char* c, int *d, char** tipo_trecho){
+void entrada(char *arquivo, char* c, int *d){
 	FILE *f;
 	char t;
 	int i, k;
