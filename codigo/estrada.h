@@ -9,6 +9,7 @@ unsigned int *tempo;
 unsigned short largura;
 unsigned int num_cic;
 unsigned int max_dist;
+int pos_ciclista(int id);
 checkpoint *pontos;
 
 pthread_mutex_t temp_mutex;

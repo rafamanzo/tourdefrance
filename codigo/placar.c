@@ -33,7 +33,7 @@ void placar_min_a_min(){
 
   printf("Ciclista\t km da etapa\n");
   for(i=0; i < num_cic; i++)
-    printf("%u %d\n", biker[i].id, (int) floor(biker[i].pos));
+    printf("%u %d\n", i, pos_ciclista(i));
 }
 
 void placar_checkpoint(unsigned int *v, int *pontos){

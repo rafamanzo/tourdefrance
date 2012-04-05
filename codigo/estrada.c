@@ -27,13 +27,21 @@ int conta_cic_posicao(unsigned int pos){
   return contagem;
 }
 
+int pos_ciclista(int id){
+  int i;
+  
+  for(i = 0; i < max_dist; i++)
+    if(estrada[i][id])
+      return i;
+}
+
 void inic_estrada(int dist){
   int i, j;
 
   tempo = malloc(num_cic*sizeof(unsigned int));
 
   pthread_mutex_init(&temp_mutex, NULL);
-  prox_sinc_temp = 0;
+  prox_sinc_temp = 1;
   max_dist = dist;
 
   estrada = malloc(dist*sizeof(short *));
