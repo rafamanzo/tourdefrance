@@ -67,7 +67,6 @@ void * loop(void *c){
   cic = *c_aux;
   
   while(cic.pos < max_dist){
-    printf("ID: %d | POS: %f | TMP %d\n", cic.id, cic.pos, tempo[cic.id]);
     avanca_espaco(&cic);
     avanca_tempo(cic.id);
   }

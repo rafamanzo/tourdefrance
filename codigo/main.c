@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
 	srand(time(NULL));
 
   entrada(argv[1], &c, &d);
+  printf("\n0\n");
  
   /* Inicialização*/
   biker = malloc(num_cic*sizeof(ciclista));

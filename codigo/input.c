@@ -8,7 +8,7 @@
 void entrada(char *arquivo, char* c, int *d){
 	FILE *f;
 	char t;
-	int i, k;
+	int i, k, fim_trecho;
   	
 	if((f = fopen(arquivo,"r")) == NULL){
 		printf("Erro ao abrir o arquivo %s.\n",arquivo);
@@ -26,7 +26,11 @@ void entrada(char *arquivo, char* c, int *d){
 	inic_estrada(*d);
 
 	for(i=0; i<=(*d); i++){
-		fscanf(f,"%c",&t);
+	  t = 10;
+	  while(t == 10){
+	    /*scanf("%c", &a);*/
+		  fscanf(f,"%c",&t);
+		}
 		if( t == EOF )
 			break;
 
@@ -42,9 +46,12 @@ void entrada(char *arquivo, char* c, int *d){
         novo_checkpoint(num_cic, PLANO, k/2, &pontos);
         break;
 		}
-		while(i<=k){
+		
+		fim_trecho = (i+k);
+		while(i<fim_trecho){
 			tipo_trecho[i] = (char) t;
 			i++;
 		}
+		tipo_trecho[i] = (char) t;
 	}
 }
