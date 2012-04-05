@@ -16,9 +16,12 @@ void entrada(char *arquivo, char* c, int *d, char** tipo_trecho){
 	}
 	fscanf(f, "%u", &num_cic);/* m: a quantidade de ciclistas */
 	fscanf(f, "%hu", &largura); /* n: a largura da pista em número de ciclistas*/
-	fscanf(f, "%c", c); /* velocidade uniforme ou arbitrária */
+	*c = 10;
+	while(*c == 10){
+	  fscanf(f, "%c", c); /* velocidade uniforme ou arbitrária */
+	}
 	fscanf(f, "%d", d); /*a distância da etapa em quilômetros*/
-
+	
 	tipo_trecho = malloc((*d)*sizeof(char));
 	inic_estrada(*d);
 
