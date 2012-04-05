@@ -1,4 +1,4 @@
-COMPILER_FLAGS=-ansi -Wall -pedantic
+COMPILER_FLAGS=-ansi -Wall -pedantic -g
 .PHONY: clean
 
 tourdefrance: main.o input.o checkpoint.o estrada.o ciclista.o placar.o

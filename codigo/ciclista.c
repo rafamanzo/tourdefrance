@@ -22,6 +22,7 @@ int avanca_tempo(int id){
       
       pthread_mutex_unlock( &temp_mutex );
     }else{
+      printf("Esperando tempo:%d\n", id);
       sleep(1);
     }
     
@@ -47,9 +48,10 @@ int avanca_espaco(ciclista *c){
   
   prox_pos = floor((*c).pos);
   
-  if(prox_pos > pos_atual){
-    while(conta_cic_posicao(prox_pos) >= largura)
+  if(prox_pos > pos_atual && prox_pos < max_dist){
+    while(conta_cic_posicao(prox_pos) >= largura){
       sleep(1);
+    }
     
     estrada[pos_atual][(*c).id] = 0;
     estrada[prox_pos][(*c).id] = 1;
@@ -66,10 +68,12 @@ void * loop(void *c){
   c_aux = (ciclista *) c;
   cic = *c_aux;
   
-  while(cic.pos < max_dist){
+  while(cic.pos <= (max_dist - 1)){
     avanca_espaco(&cic);
     avanca_tempo(cic.id);
   }
+  
+  estrada[max_dist - 1][cic.id] = 0;
   
   pthread_exit(0);
 }
