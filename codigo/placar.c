@@ -8,19 +8,19 @@
 #include "placar.h"
 
 void ordena_imprime(int *v){
-	int i, aux, j;
-	int *p;
+  int i, aux, j;
+  int *p;
   
   p = malloc(num_cic*sizeof(int));
   for(i=0; i < num_cic; i++)
-		p[i] = i;
+    p[i] = i;
 
   for(i=0; i < num_cic; i++){
     for(j=0; j < num_cic-1; j++){
       if(v[p[j]] > v[p[j+1]]){
-				aux = p[j];
-				p[j] = p[j+1];
-				p[j+1] = aux;
+        aux = p[j];
+        p[j] = p[j+1];
+        p[j+1] = aux;
       }
     }
   }
@@ -38,20 +38,20 @@ void placar_min_a_min(){
 }
 
 void placar_checkpoint(unsigned int *v, int *pontos){
-	int i, aux, j;
-	int *p;
+  int i, aux, j;
+  int *p;
   
   p = malloc(num_cic*sizeof(int));
   for(i=0; i < num_cic; i++)
-		p[i] = i;
+    p[i] = i;
 
   /* Bubble sort inverso com apenas 6 bolhas */
   for(i=0; i < 6; i++){
     for(j=0; j < num_cic-1; j++){
       if(v[p[j]] < v[p[j+1]]){
         aux = p[j];
-				p[j] = p[j+1];
-				p[j+1] = aux;
+        p[j] = p[j+1];
+        p[j+1] = aux;
       }
     }
   }
@@ -95,9 +95,9 @@ void imprime_final(){
   int *pontos_plano, *pontos_subida, *pontos_descida;
   int i;
 
-	pontos_plano = malloc(num_cic*sizeof(int));
-	pontos_subida = malloc(num_cic*sizeof(int));
-	pontos_descida = malloc(num_cic*sizeof(int));
+  pontos_plano = malloc(num_cic*sizeof(int));
+  pontos_subida = malloc(num_cic*sizeof(int));
+  pontos_descida = malloc(num_cic*sizeof(int));
 
   for( i = 0; i < num_cic; i++)
     pontos_plano[i] = pontos_subida[i] = pontos_descida[i] = 0;
@@ -106,15 +106,15 @@ void imprime_final(){
     printf("\nCheckpoint -");
     if( (*aux).tipo == PLANO ){
       printf(" Trecho Plano - %u Km \n",(*aux).posicao*2);
-  	  placar_checkpoint((*aux).tempos,pontos_plano);
+      placar_checkpoint((*aux).tempos,pontos_plano);
     }
     else if( (*aux).tipo == SUBIDA ){
       printf(" Trecho de Subida - %u Km \n",(*aux).posicao);
-   	  placar_checkpoint((*aux).tempos,pontos_subida);  
+       placar_checkpoint((*aux).tempos,pontos_subida);  
     }
     else{
       printf(" Trecho de Descida - %u Km \n",(*aux).posicao);
-   	  placar_checkpoint((*aux).tempos,pontos_descida);  
+       placar_checkpoint((*aux).tempos,pontos_descida);  
     }
     aux = (*aux).prox;
   }

@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
   int i, d;
   char c;
 
-	srand(time(NULL));
+  srand(time(NULL));
 
   entrada(argv[1], &c, &d);
   
