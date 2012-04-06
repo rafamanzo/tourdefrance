@@ -24,7 +24,7 @@ void ordena_imprime(int *v){
       }
     }
   }
-  for(j=1; j < num_cic; j++)
+  for(j=1; j <= num_cic; j++)
       printf("%dº) %d\n",j,p[num_cic-j]);
   free(p);
 }
@@ -49,7 +49,7 @@ void placar_checkpoint(unsigned int *v, int *pontos){
   for(i=0; i < 6; i++){
     for(j=0; j < num_cic-1; j++){
       if(v[p[j]] < v[p[j+1]]){
-				aux = p[j];
+        aux = p[j];
 				p[j] = p[j+1];
 				p[j+1] = aux;
       }
