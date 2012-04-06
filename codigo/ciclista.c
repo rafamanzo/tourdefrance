@@ -97,9 +97,9 @@ ciclista inicia_ciclista(char tipo, unsigned int id){
   }
   /* Aleatório */
   else{
-    cic.vp = (rand()%60 + 20)/3600.0;
-    cic.vs = (rand()%60 + 20)/3600.0;
-    cic.vd = (rand()%60 + 20)/3600.0;
+    cic.vp = (rand()%61 + 20)/3600.0;
+    cic.vs = (rand()%61 + 20)/3600.0;
+    cic.vd = (rand()%61 + 20)/3600.0;
   }
   return cic;
 }
