@@ -27,10 +27,9 @@ void entrada(char *arquivo, char* c, int *d){
 
 	for(i=0; i<=(*d); i++){
 	  t = 10;
-	  while(t == 10){
-	    /*scanf("%c", &a);*/
+	  while(t == 10)
 		  fscanf(f,"%c",&t);
-		}
+		
 		if( t == EOF )
 			break;
 

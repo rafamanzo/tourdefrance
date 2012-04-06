@@ -25,13 +25,14 @@ void ordena_imprime(int *v){
     }
   }
   for(j=1; j < num_cic; j++)
-      printf("%dº) %d\n",j,v[p[num_cic-j]]);
+      printf("%dº) %d\n",j,p[num_cic-j]);
+  free(p);
 }
 
 void placar_min_a_min(){
   int i;
 
-  printf("Ciclista\t km da etapa\n");
+  printf("\nCiclista km\n-----------\n");
   for(i=0; i < num_cic; i++)
     printf("%u\t %d\n", i, pos_ciclista(i));
 }
@@ -57,7 +58,7 @@ void placar_checkpoint(unsigned int *v, int *pontos){
   /* Imprime os 3 primeiros colocados e distribui as pontuações */
   for(j=1; j < 7; j++){
     if( j < 4 )
-      printf("%dº) %d\n",j,v[p[num_cic-j]]);
+      printf("%dº) %d\n",j,p[num_cic-j]);
     switch( j ){
       case 1:
         pontos[p[num_cic-j]] += 45;
@@ -83,8 +84,8 @@ void placar_checkpoint(unsigned int *v, int *pontos){
 }
 
 
-void imprime_final(checkpoint* c){
-  checkpoint *aux = c;
+void imprime_final(){
+  checkpoint *aux = pontos;
   int *pontos_plano, *pontos_subida, *pontos_descida;
   int i;
 
@@ -112,7 +113,7 @@ void imprime_final(checkpoint* c){
     aux = (*aux).prox;
   }
 
-  printf("Placar Trechos Planos\n");
+  printf("\nPlacar Trechos Planos\n");
   ordena_imprime(pontos_plano);
 
   printf("\nPlacar Trechos de Subida\n");
