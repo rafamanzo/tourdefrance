@@ -6,3 +6,12 @@ Primeiro exercício programa
 
 Giancarlo Rigo - 6910034
 Rafael Reggiani Manzo - 6797150
+
+
+A atribuição de velocidades, quando a simulação é com A (aleatório), é feita utilizando a função rand() da biblioteca stdlib.h e a semente de números para esta função é utilizado time(NULL). Para garantir o intervalo solicitado no enunciado, fazemos 20+rand()%61, desta forma os números gerados estarão no intervalo [20,80].
+
+Como critério de desempate é utilizado o maior dos ids entre os ciclistas, uma vez que o id é único não haverá outro empate com este critério.
+
+Saída do arquivo1.txt:
+
+Saída do arquivo2.txt:
