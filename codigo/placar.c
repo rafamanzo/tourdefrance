@@ -55,8 +55,14 @@ void placar_checkpoint(unsigned int *v, int *pontos){
       }
     }
   }
+
+  if( num_cic < 6)
+    aux = num_cic;
+  else
+    aux = 6;
+
   /* Imprime os 3 primeiros colocados e distribui as pontuações */
-  for(j=1; j < 7; j++){
+  for(j=1; j <= aux; j++){
     if( j < 4 )
       printf("%dº) %d\n",j,p[num_cic-j]);
     switch( j ){
