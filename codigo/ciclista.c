@@ -23,7 +23,7 @@ int avanca_tempo(int id){
       
       pthread_mutex_unlock( &temp_mutex );
     }else{
-      sleep(0.1);
+      sleep(0.01);
     }
     
   return 1;
@@ -55,7 +55,7 @@ int avanca_espaco(ciclista *c){
         prox_sinc_temp++;
         pthread_mutex_unlock( &temp_mutex );
       }
-      sleep(1);
+      sleep(0.01);
     }
     
     estrada[pos_atual][(*c).id] = 0;
@@ -89,6 +89,7 @@ ciclista inicia_ciclista(char tipo, unsigned int id){
  
   cic.id = id;
   cic.pos = 0.0;
+  tempo[id] = 0;
   if( tipo == 'U' ){
     cic.vp = 50.0/3600.0;
 	  cic.vs = 50.0/3600.0;
