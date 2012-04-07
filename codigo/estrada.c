@@ -21,9 +21,9 @@ int conta_cic_posicao(unsigned int pos, int tmp){
   contagem = 0;
   
   for(i = 0; i < num_cic; i++)
-    if(estrada[pos][i] == 1 && tempo[i] == tmp)
+    if(estrada[pos][i] == 1 && tempo[i] >= tmp)
       contagem++;
-      
+
   return contagem;
 }
 

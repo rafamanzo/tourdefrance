@@ -55,6 +55,7 @@ int avanca_espaco(ciclista *c){
         prox_sinc_temp++;
         pthread_mutex_unlock( &temp_mutex );
       }
+      avanca_tempo((*c).id);
       sleep(0.01);
     }
     
@@ -74,8 +75,8 @@ void * loop(void *c){
   cic = *c_aux;
   
   while(cic.pos <= (max_dist - 1)){
-    avanca_espaco(&cic);
     avanca_tempo(cic.id);
+    avanca_espaco(&cic);
   }
   
   estrada[max_dist - 1][cic.id] = 0;
